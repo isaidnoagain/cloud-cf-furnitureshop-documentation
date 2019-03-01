@@ -50,7 +50,7 @@ We will create a new business application using Web IDE. We will define a CDS da
 1. Launch Web IDE using the direct link <https://webidecp-aevblwuamw.dispatcher.hana.ondemand.com/>
 1. Enter your user ID and Password.
 1. Select _File -> New -> Project from Template_.
-1. Choose `SAP Cloud Platform Business Application`.
+1. Choose `SAP Cloud Platform Business Application` and `SAPUI 1.52` as the SAPUI5 Version.
 
     ![Business App](images/Exercise1_1_business_app.jpg)
 
@@ -90,7 +90,7 @@ We will create a new business application using Web IDE. We will define a CDS da
 3. Notice that by default, the project has been created with two modules: a database module (`db`) and a service module (`srv`).  Each of these modules contains its own CDS file:
 
     * `db/data-model.cds` and
-    * `srv/my-service.cds`
+    * `srv/cat-service.cds`
 
     Your Java code is located in the `srv/src/main/` folder
 
@@ -131,7 +131,7 @@ We will create a new business application using Web IDE. We will define a CDS da
 
     ![save](images/Exercise1_Save.jpg)
 
-1.	Open the `my-service.cds` under the srv module and replace the source code of the file with following:
+1.	Open the `cat-service.cds` under the srv module and replace the source code of the file with following:
 
     ```javascript
     using com.company.furnitureshop from '../db/data-model';
@@ -161,35 +161,10 @@ We will create a new business application using Web IDE. We will define a CDS da
 
     You should see output similar to that shown below.  The important part is the `CDS return code: 0`.
 
-    ```
-    16:51:07 (DIBuild) [INFO] Injecting source code into builder...
-    [INFO] Source code injection finished
-    [INFO] ------------------------------------------------------------------------
-    npm install
-    up to date in 0.206s
-    npm run build
 
-    > furnitureshop@1.0.0 build /home/vcap/app/.java-buildpack/tomcat/temp/builder/sap.cds.mta/builds/build-5735012828943919909/furnitureshop
-    > cds build --clean
+2. Download the [csv.zip](https://github.com/SAP/cloud-cf-furnitureshop-documentation/raw/master/Exercise-03-Publish-Wishlist/csv.zip) and save it locally.  Remember where you have saved this file, as you will need to upload it into WebIDE in the next step
 
-    This is CDS 2.10.1, Compiler 1.1.3, Home: node_modules/@sap/cds
-
-    Compiled 'db/data-model.cds' to
-      db/src/gen/.hdinamespace
-      db/src/gen/CATALOGSERVICE_WISHLIST.hdbcds
-      db/src/gen/COM_COMPANY_FURNITURESHOP_WISHLIST.hdbcds
-
-    Compiled 'srv/my-service.cds' to
-      srv/src/main/resources/edmx/CatalogService.xml
-      srv/src/main/resources/edmx/csn.json
-
-    CDS return code: 0
-    16:51:07 (DIBuild) ********** End of /furnitureshop Build Log **********
-    ```
-
-1. Download the [csv.zip](https://github.com/SAP/cloud-cf-furnitureshop-documentation/raw/master/Exercise-03-Publish-Wishlist/csv.zip) and save it locally.  Remember where you have saved this file, as you will need to upload it into WebIDE in the next step
-
-1. Right-click on `src` folder under the `db` module and choose _Import - File or Project_.
+3. Right-click on `src` folder under the `db` module and choose _Import - File or Project_.
 
     ![import](images/Exercise1_8_import.jpg)
 
@@ -197,15 +172,15 @@ We will create a new business application using Web IDE. We will define a CDS da
 
     ![import](images/Exercise1_9_import.jpg)
 
-1. Click _OK_.
+4. Click _OK_.
 
     In case you see a pop-up message that the import will over write an existing folder, please ignore this message and proceed further by clicking 'Import'.
 
-1. Expand the `db` module for your project in the workspace explorer and confirm that the `csv` folder has been created and that the two files `Data.hdbtabledata` and `Wishlist.csv` have been imported.
+5. Expand the `db` module for your project in the workspace explorer and confirm that the `csv` folder has been created and that the two files `Data.hdbtabledata` and `Wishlist.csv` have been imported.
 
     ![imported](images/Exercise1_10_imported_files.png)
 
-1. The purpose of the `Data.hdbtabledata` file is to give HANA instructions on how to populate our database table at the time it is created.  This file instructs HANA to transfer the data found in the `Wishlist.csv` file into the database.
+6. The purpose of the `Data.hdbtabledata` file is to give HANA instructions on how to populate our database table at the time it is created.  This file instructs HANA to transfer the data found in the `Wishlist.csv` file into the database.
 
     For your information, open the file `Data.hdbtabledata` under `db\src\csv` and you will see a JSON object:
 
@@ -222,23 +197,23 @@ We will create a new business application using Web IDE. We will define a CDS da
 
     Notice that the target table created in the HANA database has been named according to the namespace you used for your project followed the entity name. For example if the namespace is `com.company.furnitureshop` and the entity name in your `data-model.cds` is `wishlist`, then the table created on HANA will be `COM_COMPANY_FURNITURESHOP_WISHLIST` (where the dots in the namespace have been replaced with underscores).
 
-1. Having compiled our CDS data model into a form suitable for the HANA database, we now need to deploy this definition to HANA. The `Data.hdbtabledata` file seen above will then additionally allow HANA to pre-fill this table with data.
+7. Having compiled our CDS data model into a form suitable for the HANA database, we now need to deploy this definition to HANA. The `Data.hdbtabledata` file seen above will then additionally allow HANA to pre-fill this table with data.
 
     To deploy this definition to HANA, right-click on the `db` module and select _Build -> Build_.
 
     ![Project Name](images/Exercise1_11_build_db1.jpg)
 
-1. Now that our database has been deployed to HANA (built) and loaded with data, we can now look at this information.
+8. Now that our database has been deployed to HANA (built) and loaded with data, we can now look at this information.
 
     Right Click on the `db` module and select _Open HDI Container_.
 
     If you do not see this option, then check that the **SAP HANA Database Explorer** feature has been switched _ON_ as mentioned in [exercise 2](../Exercise-02-Setup/README.md#3-enable-web-ide-features).
 
-1. Click _No_ if you are prompted to add a database.
+9. Click _No_ if you are prompted to add a database.
 
-1. You will see the HDI Container as shown
+10. You will see the HDI Container as shown
 
-1. Select Tables to expand the list of tables. Our database contains only the one table `COM_COMPANY_FURNITURESHOP_WISHLIST`.
+11. Select Tables to expand the list of tables. Our database contains only the one table `COM_COMPANY_FURNITURESHOP_WISHLIST`.
 
     ![tables](images/Exercise1_14_tables.jpg)
 
@@ -341,7 +316,7 @@ We will now make use of the third layer in CDS and create a SAPUI5 application i
 
 1. Open the `mta.yaml` file.
 
-1. For the `UI` module, change the disk-quota and memory parameter from `256M` to `512M`
+1. For the `UI` module, change the **disk-quota and memory parameter** from `256M` to `512M`
 
 1. Click _Save_.
 
