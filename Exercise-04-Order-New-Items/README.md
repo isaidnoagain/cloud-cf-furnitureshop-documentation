@@ -10,14 +10,18 @@
 
 
 ## Table of Contents
-* [Overview](#user-content-intro)
-* [Deploy Product Backend OData Service](#user-content-step1)
-* [Configure the SAP Cloud Connector](#user-content-step2)
-* [Enhance the Service for the Wishlist Application](#user-content-step3)
-* [Extend the User Interface to Display On-Premise Product Data](#user-content-step4)
-* [Build and Deploy Application to SAP Cloud Platform](#user-content-step5)
-* [Create Destination Configuration on SAP Cloud Platform](#user-content-step6)
-* [Test the Application](#user-content-step7)
+- [Exercise 4 - Order New Items](#exercise-4---order-new-items)
+  - [Navigation](#navigation)
+  - [Table of Contents](#table-of-contents)
+- [Overview](#overview)
+- [1. Deploy Product Backend OData Service](#1-deploy-product-backend-odata-service)
+- [2. Configure the SAP Cloud Connector](#2-configure-the-sap-cloud-connector)
+- [3. Enhance the Service for the Wishlist Application](#3-enhance-the-service-for-the-wishlist-application)
+- [4. Extend the User Interface to Display On-Premise Product Data](#4-extend-the-user-interface-to-display-on-premise-product-data)
+- [5. Build and Deploy Application to SAP Cloud Platform](#5-build-and-deploy-application-to-sap-cloud-platform)
+- [6. Create Destination Configuration on SAP Cloud Platform](#6-create-destination-configuration-on-sap-cloud-platform)
+- [7. Test the Application](#7-test-the-application)
+  - [Navigation](#navigation-1)
 
 
 <a name="Intro"></a>
@@ -193,7 +197,7 @@ Using Web IDE, we can now enhance the service module of our existing wishlist ap
 
     As you save the `data-model.cds` file, think about the consequences of that last statement.
 
-1. Under the `srv` folder, edit the file `my-service.cds` to *add a new entity* `BackendProductData` as shown below (or simply **replace the entire contents of the file with the following**):
+1. Under the `srv` folder, edit the file `cat-service.cds` to *add a new entity* `BackendProductData` as shown below (or simply **replace the entire contents of the file with the following**):
 
     ```javascript
     using com.company.furnitureshop from '../db/data-model';
@@ -234,7 +238,7 @@ Using Web IDE, we can now enhance the service module of our existing wishlist ap
 
     You don't need to modify the package name.
 
-    Replace the file with the code below:
+    **Replace** the code in the file with the code below:
 
     ```java
     package com.company.furnitureshop;
@@ -319,6 +323,7 @@ Using Web IDE, we can now enhance the service module of our existing wishlist ap
 
 1. In the same folder create another Java class and name it as `BackendService`.
 
+    **Replace** the code in the file with the code below:
     Paste in the code shown below:
 
     ```java
@@ -416,7 +421,7 @@ Using Web IDE, we can now enhance the service module of our existing wishlist ap
     }
     ```
 
-    This coding uses the SAP Cloud Platform SDK to implement the OData service exposed by the SAP Cloud Platform, but under the surface, it uses the SAP Cloud Connector connection (via a destination called `ONPREM_BACKEND` that we haven't created yet) to call the OData service running in our local Tomcat server.
+    This coding uses the SAP Cloud Platform SDK to implement the OData service exposed by the SAP Cloud Platform, but under the surface, it uses the SAP Cloud Connector connection (via a destination called `ONPREM_BACKEND` *that we haven't created yet*) to call the OData service running in our local Tomcat server.
 
     The `@Query` annotation implements the query operation for the `BackEndProductData` entity set and the `@Read` annotation for reading a single `BackEndProductData` entity.
 
@@ -518,17 +523,17 @@ There are 2 things we need to change in the UI:
 * Add a new Tab to show Backend Product Data that we fetch from on-Premise system.
 * Update the code to Display Product Ratings.
 
-1. Expand the folder `ui/module/webapp/view` and open the file `Detail.view.xml`.
+1. Expand the folder `ui/webapp/view` and open the file `Detail.view.xml`.
 
     Replace the contents of the file with this [DetailView.xml](https://raw.githubusercontent.com/SAP/cloud-cf-furnitureshop-demo/step2-order-service/ui/webapp/view/Detail.view.xml)
 
-1. Save the file
+2. Save the file
 
-1. Now expand the folder `ui/webapp/controller` and open `Detail.controller.js`.
+3. Now expand the folder `ui/webapp/controller` and open `Detail.controller.js`.
 
     Replace the contents of the file with this [Detail.controller](https://raw.githubusercontent.com/SAP/cloud-cf-furnitureshop-demo/step2-order-service/ui/webapp/controller/Detail.controller.js)
 
-1. Open the `mta.yaml` file in the top-level project folder
+4. Open the `mta.yaml` file in the top-level project folder
 
     ![mta_img](images/Exercise2_mta_file.jpg)
 
@@ -542,17 +547,23 @@ There are 2 things we need to change in the UI:
 
 We are now ready to build the `furnitureshop` project and deploy it to Cloud Foundry.
 
-1. Now that we have changed both the data model and the service definition, we must rerun the CDS compiler.
-Right-click on the `furnitureshop` project name and select _Build -> Build CDS_.
+1. Now that we have changed both the data model and the service definition, we must rebuild our db module and CDS files.
+* DB Mobule:
 
-    ![Build Project](images/Exercise2_build_cds.JPG)
+  Right-click on the `db` project name and select _Build -> Build_.
+
+  ![Build Project](images/Exercise2_build_db.png)
+
+* Right-click on the `furnitureshop` project name and select _Build -> Build CDS_.
+
+    ![Build Project](images/Exercise2_build_cds.png)
 
 
 1. In the console, confirm that the CDS compiler gave a zero return code.
 
 2. Right-click on the project name and select _Build -> Build_.
 
-    ![Build Project](images/Exercise2_17_build.JPG)
+    ![Build Project](images/Exercise2_17_build.png)
 
     The build process may take a couple of minutes to complete, but when it does, you will see a new folder in your workspace called `mta_archives` within which your new `furnitureship_0.0.1.mtar` file can be found
 
