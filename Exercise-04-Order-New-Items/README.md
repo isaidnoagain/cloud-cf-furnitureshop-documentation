@@ -179,9 +179,31 @@ This completes the configuration of the SAP Cloud Connector.
 Using Web IDE, we can now enhance the service module of our existing wishlist application to include data from our simulated premise system.
 
 1. In Web IDE, open your existing `furnitureshop` application.
-1. Under the `db` folder, edit the file `data-model.cds` and **append a new entity called** `BackendProductData` to the end of the file:
+2. Under the `db` folder, edit the file `data-model.cds` by **replacing the entire content of the file with the following**
 
     ```javascript
+    namespace com.company.furnitureshop;
+
+    entity Wishlist {
+      key ProductID        : String;
+          categoryName     : String;
+          productName      : String;
+          productDesc      : String;
+          productColor     : String;
+          productWidth     : Integer;
+          productHeight    : Integer;
+          productDepth     : Integer;
+          productWeight    : Integer;
+          productPrice     : Decimal(10,2);
+          productWarranty  : Integer;
+          materialType     : String;
+          supplierID       : String;
+          supplierName     : String;
+          supplierLocation : String;
+          pictureURL       : String;
+          productRating    : Decimal(3,2);
+    }
+
     entity BackEndProductData {
       key ProductID    : String;
           SUPPLIERID   : String;
@@ -197,7 +219,7 @@ Using Web IDE, we can now enhance the service module of our existing wishlist ap
 
     As you save the `data-model.cds` file, think about the consequences of that last statement.
 
-1. Under the `srv` folder, edit the file `cat-service.cds` to *add a new entity* `BackendProductData` as shown below (or simply **replace the entire contents of the file with the following**):
+3. Under the `srv` folder, edit the file `cat-service.cds` by **replacing the entire content of the file with the following**
 
     ```javascript
     using com.company.furnitureshop from '../db/data-model';
@@ -221,7 +243,7 @@ Using Web IDE, we can now enhance the service module of our existing wishlist ap
     * Modify the data model to include the definition of entity `BackEndProductData`
     * Modify the service to expose this new entity as part of the OData service, yet at the same time, explicitly exclude this entity from being created in the HANA database.  This is because the data comes from an alternative source that we must now define.
 
-    Save the `my-service.cds` file
+    Save the `cat-service.cds` file
 
 1.	Since the entity `BackendProductData` is exposed as part of the OData service, yet it does not exist in the HANA database, unless we implement how this data should be retrieved, any OData `GET` operations on this entity will always return an empty collection. Therefore, the `Query` and `Read` operations against the `BackendProductData` entity must be supplied by a custom implementation in Java.
 
@@ -425,7 +447,7 @@ Using Web IDE, we can now enhance the service module of our existing wishlist ap
 
     The `@Query` annotation implements the query operation for the `BackEndProductData` entity set and the `@Read` annotation for reading a single `BackEndProductData` entity.
 
-1. In the same folder create another Java class and name it as `WishlistHandler`. Replace the contents of file with the code shown below:
+2. In the same folder create another Java class and name it as `WishlistHandler`. Replace the contents of file with the code shown below:
 
     This Java Class handles the Wishlist collection's update method which will be used in the next exercise
 
@@ -508,7 +530,7 @@ Using Web IDE, we can now enhance the service module of our existing wishlist ap
     }
     ```
 
-1. Save the file
+3. Save the file
 
 [Top](#top)
 
@@ -527,11 +549,17 @@ There are 2 things we need to change in the UI:
 
     Replace the contents of the file with this [DetailView.xml](https://raw.githubusercontent.com/SAP/cloud-cf-furnitureshop-demo/step2-order-service/ui/webapp/view/Detail.view.xml)
 
+    Here we are making 2 changes:
+    1. Adding a new Tab to show the On-Premise data.
+    2. Adding a field to show the average customer rating.
+
 2. Save the file
 
 3. Now expand the folder `ui/webapp/controller` and open `Detail.controller.js`.
 
     Replace the contents of the file with this [Detail.controller](https://raw.githubusercontent.com/SAP/cloud-cf-furnitureshop-demo/step2-order-service/ui/webapp/controller/Detail.controller.js)
+
+    In the Detail controller file, we add the logic to fetch the data used by the UI Elements added in the previous step.
 
 4. Open the `mta.yaml` file in the top-level project folder
 
@@ -547,17 +575,19 @@ There are 2 things we need to change in the UI:
 
 We are now ready to build the `furnitureshop` project and deploy it to Cloud Foundry.
 
-1. Now that we have changed both the data model and the service definition, we must rebuild our db module and CDS files.
+1. Now that we have changed both the data model and the service definition, we must rebuild our `CDS files` and `DB Module`.
+
+* CDS File
+
+  Right-click on the `furnitureshop` project name and select _Build -> Build CDS_.
+
+    ![Build Project](images/Exercise2_build_cds.png)
+
 * DB Mobule:
 
   Right-click on the `db` project name and select _Build -> Build_.
 
   ![Build Project](images/Exercise2_build_db.png)
-
-* Right-click on the `furnitureshop` project name and select _Build -> Build CDS_.
-
-    ![Build Project](images/Exercise2_build_cds.png)
-
 
 1. In the console, confirm that the CDS compiler gave a zero return code.
 
@@ -569,7 +599,7 @@ We are now ready to build the `furnitureshop` project and deploy it to Cloud Fou
 
 3. Right-click the `furnitureshop_0.0.1.mtar` file and select _Deploy -> Deploy to SAP Cloud Platform_.
 
-    ![Deploy mtar](images/Exercise2_18_deploy_mtar.JPG)
+    ![Deploy mtar](images/Exercise2_18_deploy_mtar.png)
 
 4. You may get a popup asking you to enter your credentials, please enter your id/password, then in the _Deploy to SAP Cloud Platform_ dialog, enter:
 

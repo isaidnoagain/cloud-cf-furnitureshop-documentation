@@ -76,6 +76,7 @@ We will create a new business application using Web IDE. We will define a CDS da
     Service (srv): Java
     Java Package: com.company.furnitureshop
     Database (db): SAP HANA Database
+    Database Version: 2.0 SPS 00 (2.0.0.0)
     ```
     **Note**
      * *Please **do not** select the option Enable User authentication(UAA), we will enable this in the next exercise*
@@ -304,7 +305,7 @@ We will now make use of the third layer in CDS and create a SAPUI5 application i
 
     - App Type: `Standalone App`
     - Object Collection: `Wishlist`
-    - Object Collection ID: `Productid`
+    - Object Collection ID: `ProductID`
     - Object Title: `productName`
     - Object Numeric Attribute: `productPrice`
 
@@ -465,8 +466,9 @@ Unlike the Java application, this UI application runs in the Web IDE design time
 1. Login to your SAP Cloud Platform Cockpit, navigate to your space and your Service Instances.
 
 1. Delete the instance `furnitureshop-furnitureshop-hdidb<random_string>`.
+   ![del hana instance](images/Exercise1_30_del_temp_hana_instance.png)
 
-1. Stop your running application from the Web IDE Run Console.
+2. Stop your running application from the Web IDE Run Console.
 
 [Top](#top)
 
