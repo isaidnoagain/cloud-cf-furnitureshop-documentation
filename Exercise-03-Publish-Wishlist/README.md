@@ -163,7 +163,7 @@ We will create a new business application using Web IDE. We will define a CDS da
     You should see output similar to that shown below.  The important part is the `CDS return code: 0`.
 
 
-2. Download the [csv.zip](https://github.com/SAP/cloud-cf-furnitureshop-documentation/raw/master/Exercise-03-Publish-Wishlist/csv.zip) and save it locally.  Remember where you have saved this file, as you will need to upload it into WebIDE in the next step
+2. Download the [csv.zip](https://github.com/sandeep-tds/cloud-cf-furnitureshop-documentation/raw/master/Exercise-03-Publish-Wishlist/csv.zip) and save it locally.  Remember where you have saved this file, as you will need to upload it into WebIDE in the next step
 
 3. Right-click on `src` folder under the `db` module and choose _Import - File or Project_.
 
@@ -323,7 +323,7 @@ We will now make use of the third layer in CDS and create a SAPUI5 application i
 
 1. Open the file `xs-security.json` and edit the `xsappname` parameter to `furnitureshop_XXX`, where `XXX` is your student number. Click _Save_.
 
-1. Download the [img.zip](https://github.com/SAP/cloud-cf-furnitureshop-documentation/raw/master/Exercise-03-Publish-Wishlist/img.zip) file and save it locally.
+1. Download the [img.zip](https://github.com/sandeep-tds/cloud-cf-furnitureshop-documentation/raw/master/Exercise-03-Publish-Wishlist/img.zip) file and save it locally.
 
     Please remember where you have saved this file, as you will need to upload it into Web IDE in the next step.
 

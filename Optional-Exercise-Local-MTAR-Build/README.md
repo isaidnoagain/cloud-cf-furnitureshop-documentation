@@ -21,14 +21,18 @@ To ensure that you system is capable of building mtar files locally we need to s
     ```
     You should see the version of Node and NPM that you are running
 
-3. CF CLI - The systems provided to you should already have CF CLI running. To verify that you have it running properly on your system, execute the following command in your terminal (or) command prompt
+3. **CF CLI** - The systems provided to you should already have CF CLI running. To verify that you have it running properly on your system, execute the following command in your terminal (or) command prompt
     ```bash
     cf version
     ```
     You should see the version of CF CLI that you are running
 
+    If CF CLI is not installed, please use the following links to install it on your system.
 
-4. Download the MTA Builder JAR.
+    * [Windows](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html#windows)
+    * [Mac](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html#mac)
+
+4. **MTA Builder JAR**
     * Download the MTA builder JAR file from [here](https://tools.hana.ondemand.com/additional/mta_archive_builder-1.1.7.jar) .
     * Rename the the downloaded file to `mta.jar`.
 
@@ -41,7 +45,7 @@ To ensure that you system is capable of building mtar files locally we need to s
 3. To download the project as an archive follow these steps:
     * You can use the same GitHub-URL as the one provided to you for cloning.
    ```url
-   Example - https://github.com/SAP/cloud-cf-furnitureshop-product-ratings.git
+   Example - https://github.com/sandeep-tds/cloud-cf-furnitureshop-product-ratings.git
    ```
     * From the branches list, select the branch that you wish to work on.
        ![Step Image](images/local_deploy_2-3-2_branches.png)
@@ -85,8 +89,8 @@ If your system doesn't have **JAVA, Node, NPM or CF CLI** please refer to the po
     * If you are unable to install node correctly please refer to this [link](https://docs.npmjs.com/getting-started/installing-node#1-install-nodejs--npm)
 
 3. In case your CF CLI is not setup please follow these steps:
-    * Follow the steps mentioned in this [link](https://github.com/SAP/cloud-cf-furnitureshop-documentation/tree/master/Exercise-02-Setup#6-install-the-cloudfoundy-cli) if you haven't set up CF CLI tool
-    * Once you've installed your CF CLI tool, follow the steps mentioned in the 4th point [here](https://github.com/SAP/cloud-cf-furnitureshop-documentation/tree/master/Exercise-11-Blue-Green-Deployment-of-Comments-and-Ratings#2-deploying-the-updated-version-using-blue-green-deployment) to login into your SAP Cloud Platform - Cloud Foundry Space.
+    * Follow the steps mentioned in this [link](https://github.com/sandeep-tds/cloud-cf-furnitureshop-documentation/tree/master/Exercise-02-Setup#6-install-the-cloudfoundy-cli) if you haven't set up CF CLI tool
+    * Once you've installed your CF CLI tool, follow the steps mentioned in the 3rd point [here](https://github.com/sandeep-tds/cloud-cf-furnitureshop-documentation/tree/master/Optional-Exercise-Local-MTAR-Build#1-setup) to login into your SAP Cloud Platform - Cloud Foundry Space.
 
 4. If you plan to clone your git project, please follow the steps mentioned [here](https://git-scm.com/downloads) to setup git on your local system.
 

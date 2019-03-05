@@ -251,7 +251,7 @@ Let us look at two files *`manifest.json`* and *`xs-app.json`* where you specify
 ## Further Reading
 * [Starting point for SAPUI5 and Fiori](https://sapui5.hana.ondemand.com/)
 * [SAP UI5 Icon explorer](https://sapui5.hana.ondemand.com/test-resources/sap/m/demokit/iconExplorer/webapp/index.html#)
-* [Github code repository](https://github.com/SAP/cloud-cf-furnitureshop-product-ratings)
+* [Github code repository](https://github.com/sandeep-tds/cloud-cf-furnitureshop-product-ratings)
 
 [Top](#Top)
 

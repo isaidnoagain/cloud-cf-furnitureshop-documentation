@@ -73,7 +73,7 @@ In this section, we will clone the exercise content from Git to SAP Web IDE Full
 1. Enter the git repository URL to clone from and click on 'Clone'.
 
     ```
-    https://github.com/SAP/cloud-cf-furnitureshop-product-ratings.git
+    https://github.com/sandeep-tds/cloud-cf-furnitureshop-product-ratings.git
     ```
 
 	![Step Image](images/Exercise6_1-3_clone_git_popup.png)
@@ -84,9 +84,13 @@ In this section, we will clone the exercise content from Git to SAP Web IDE Full
 
    As the version on the SAP Web IDE as recently updated, you can ignore the ES-Lint issues.
 
-1. The application consists of 3 modules - `ratings_backend`, `ratings_frontend` and `tweets_comments`. In this exercise, we will focus on the `ratings_backend` module.
+   If you see the `Git Ignore File Systems` dialog box, click on the `Do It Later` button.
 
-1. Open the `ratings_backend` module and navigate to `package.json`.  This file lists all the packages on which your module depends.
+   ![Step Image](images/Exercise6_1-5_git_dialog.png)
+
+2. The application consists of 3 modules - `ratings_backend`, `ratings_frontend` and `tweets_comments`. In this exercise, we will focus on the `ratings_backend` module.
+
+3. Open the `ratings_backend` module and navigate to `package.json`.  This file lists all the packages on which your module depends.
 
     ![Step Image](images/Exercise6_1-6_ratings_backend.png)
 
@@ -118,7 +122,7 @@ Sharing of data between micro-services is always a difficult architectural decis
 
 1. In this file we initialise the PostgreSQL database and load the required data from the Wishlist service to PostgreSQL. You will see 2 methods - `initializeDB` and `uploadInitialData` which are used to achieve this. Uncomment these 2 methods.
 
-    Note: To uncomment, select the commented lines and press Ctrl-/ (Control slash) or right-click over the selected lines and choose 'Toggle Line Comment'.
+    Note: To uncomment, select the commented lines and press `Ctrl + /` or `Cmd + /` or right-click over the selected lines and choose 'Toggle Line Comment'.
 
    ![Step Image](images/Exercise6_2-2_app_2methods.png)
 
@@ -147,11 +151,17 @@ Sharing of data between micro-services is always a difficult architectural decis
 
    * `updateWishlistRating` is used to share the average rating of a wishlist product to service 1. It looks for the destination where the OData endpoint is described. Once the OData URL is discovered, a PUT request is made to update average rating into the SAP HANA database.
 
-   **Uncomment both functions**
+    **Uncomment these functions**
+
+   ![Step Image](images/Exercise6_2-4_method1.png)
+   ![Step Image](images/Exercise6_2-4_method2.png)
+
 
 1. The `route.js` module under the `route` folder is used to expose these functions as REST APIs. Have a look at this file to understand how this is achieved.
 
    ![Step Image](images/Exercise6_2-5_route_js.png)
+
+    Note: You *do not* need to uncomment any code in this file yet.
 
 [Top](Top)
 
@@ -161,7 +171,7 @@ Sharing of data between micro-services is always a difficult architectural decis
 <a name="Step3"></a>
 ## 3. Deploy the Application
 
-We will now build and deploy the application that has been built above. Please note that the build and deploy may take few minutes. Please use this deployment time to login to the Cloud cockpit and check the creation of backing service instances, service bindings and applications. The order mentioned in your `mta.yaml` file will be followed during the deployment. You can also keep an eye on the flow of the deployment by watching the console logs from Web IDE or using the CF CLI command - **`cf logs <app name> --recent`**.
+We will now build and deploy the application that has been built above. Please note that the build and deploy may take few minutes.
 
 1. Using your Files explorer in Web IDE, right click on the **`cloud-cf-furnitureshop-product-ratings`** folder, select _Build -> Build_ as shown in the picture below.
 
@@ -169,11 +179,11 @@ We will now build and deploy the application that has been built above. Please n
 
     Once the build is completed successfully, you will see a new folder created in your project with the name **`mta_archives`**.
 
-1. Right click on the generated `.mtar` file **`product_ratings_1.0.0.mtar`**, select _Deploy -> Deploy to SAP Cloud Platform_ as shown in the picture below.
+2. Right click on the generated `.mtar` file **`product_ratings_1.0.0.mtar`**, select _Deploy -> Deploy to SAP Cloud Platform_ as shown in the picture below.
 
     ![Step Image](images/Exercise6_3-2_project_deploy.png)
 
-1. In the popup that appears, please enter the following details and click on Deploy
+3. In the popup that appears, please enter the following details and click on Deploy
 
     ![Step Image](images/Exercise6_3-3_deploy_mtar_cf_endpoint.png)
 
@@ -183,11 +193,19 @@ We will now build and deploy the application that has been built above. Please n
     Space: <select your space from the drop down list>
     ```
 
-1. The `odata.js` file under the `odata` folder in our deployment will expect a destination by name `getWishList`. Note that we have already created this destination in [Exercise 4](https://github.com/SAP/cloud-cf-furnitureshop-documentation/tree/master/Exercise-04-Order-New-Items#6-create-destination-configuration-on-sap-cloud-platform).
+4. The `odata.js` file under the `odata` folder in our deployment will expect a destination by name `getWishList`. Note that we have already created this destination in [Exercise 4](https://github.com/sandeep-tds/cloud-cf-furnitureshop-documentation/tree/master/Exercise-04-Order-New-Items#6-create-destination-configuration-on-sap-cloud-platform).
 
    ![Step Image](images/Exercise6_3-4_odata_destination.png)
 
-5. As the deployment of a NodeJS application involves uploading and packaging a number of files and modules, the deployment via Web IDE might take some time. Please use this opportunity to login to the Cloud cockpit and check the creation of backing service instances, service bindings and applications. The order mentioned in your `mta.yaml` file will be followed during the deployment. You can also keep an eye on the flow of the deployment by watching the console logs from Web IDE or using the CF CLI command - **`cf logs <app name> --recent`**.
+5. As the deployment of a NodeJS application involves uploading and packaging a number of files and modules, the deployment via Web IDE might take some time.
+
+    Please use this opportunity to login to the Cloud cockpit and check the creation of backing service instances, service bindings and applications.
+
+    The order mentioned in your `mta.yaml` file will be followed during the deployment. You can also keep an eye on the flow of the deployment by watching the console logs from Web IDE or using the CF CLI command -
+
+   ```shell
+   cf logs ratings_backend --recent
+   ```
 
 6. Once the deployment is successful, click on the url below _Application Routes_. The application opens in a new tab.
 

@@ -438,25 +438,24 @@ There are 2 things we need to change in the UI:
 
 1. Expand the folder `ui/webapp/view` and open the file `Detail.view.xml`.
 
-    Replace the contents of the file with this [DetailView.xml](https://raw.githubusercontent.com/SAP/cloud-cf-furnitureshop-demo/step2-order-service/ui/webapp/view/Detail.view.xml)
+    Replace the contents of the file with this [DetailView.xml](https://raw.githubusercontent.com/SAP/cloud-cf-furnitureshop-demo/step2-order-service/ui/webapp/view/Detail.view.xml) and click on Save
 
     Here we are making 2 changes:
     1. Adding a new Tab to show the On-Premise data.
     2. Adding a field to show the average customer rating.
 
-2. Save the file
 
-3. Now expand the folder `ui/webapp/controller` and open `Detail.controller.js`.
+2. Now expand the folder `ui/webapp/controller` and open `Detail.controller.js`.
 
-    Replace the contents of the file with this [Detail.controller](https://raw.githubusercontent.com/SAP/cloud-cf-furnitureshop-demo/step2-order-service/ui/webapp/controller/Detail.controller.js)
+    Replace the contents of the file with this [Detail.controller](https://raw.githubusercontent.com/SAP/cloud-cf-furnitureshop-demo/step2-order-service/ui/webapp/controller/Detail.controller.js) and click on Save
 
     In the Detail controller file, we add the logic to fetch the data used by the UI Elements added in the previous step.
 
-4. Open the `mta.yaml` file in the top-level project folder
+3. Open the `mta.yaml` file in the top-level project folder and replace the contents of `mta.yaml` with this version [mta.yaml](https://raw.githubusercontent.com/SAP/cloud-cf-furnitureshop-demo/step2-order-service/mta.yaml)
 
     ![mta_img](images/Exercise2_mta_file.jpg)
 
-    Replace the contents of `mta.yaml` with this version [mta.yaml](https://raw.githubusercontent.com/SAP/cloud-cf-furnitureshop-demo/step2-order-service/mta.yaml)
+    Here we add a property that allows our `srv` server app to expose date through the destinations feature on SAP Cloud Platform.
 
 [Top](#top)
 
@@ -474,25 +473,27 @@ We are now ready to build the `furnitureshop` project and deploy it to Cloud Fou
 
     ![Build Project](images/Exercise2_build_cds.png)
 
+    In the console, confirm that the CDS compiler gave a zero return code.
+
 * DB Mobule:
 
   Right-click on the `db` project name and select _Build -> Build_.
 
   ![Build Project](images/Exercise2_build_db.png)
 
-1. In the console, confirm that the CDS compiler gave a zero return code.
+2. Next, delete the DB Instance created on your SAP Cloud Platform Cockpit. As done in [the second step of this section](https://github.com/sandeep-tds/cloud-cf-furnitureshop-documentation/tree/master/Exercise-03-Publish-Wishlist#3-clean-up).
 
-2. Right-click on the project name and select _Build -> Build_.
+3. Right-click on the project name and select _Build -> Build_.
 
     ![Build Project](images/Exercise2_17_build.png)
 
-    The build process may take a couple of minutes to complete, but when it does, you will see a new folder in your workspace called `mta_archives` within which your new `furnitureship_0.0.1.mtar` file can be found
+    The build process may take a couple of minutes to complete,but when it does, you will see a new folder in your workspace called `mta_archives` within which your new `furnitureship_0.0.1.mtar` file can be found
 
-3. Right-click the `furnitureshop_0.0.1.mtar` file and select _Deploy -> Deploy to SAP Cloud Platform_.
+4. Right-click the `furnitureshop_0.0.1.mtar` file and select _Deploy -> Deploy to SAP Cloud Platform_.
 
     ![Deploy mtar](images/Exercise2_18_deploy_mtar.png)
 
-4. You may get a popup asking you to enter your credentials, please enter your id/password, then in the _Deploy to SAP Cloud Platform_ dialog, enter:
+5. You may get a popup asking you to enter your credentials, please enter your id/password, then in the _Deploy to SAP Cloud Platform_ dialog, enter:
 
     - Cloud Foundry API Endpoint: `https://api.cf.eu10.hana.ondemand.com`
     - Organization: `TechEd2018_OPP363`
@@ -505,7 +506,7 @@ We are now ready to build the `furnitureshop` project and deploy it to Cloud Fou
     ***IMPORTANT***
     Please do not attempt to run your `furnitureshop` application until the deployment has completed!
 
-5. Once the deployment has completed successfully, in the Applications section of your SAP Cloud Platform cockpit, you will see that three new applications have been deployed: `db`, `srv` and `ui`.
+6. Once the deployment has completed successfully, in the Applications section of your SAP Cloud Platform cockpit, you will see that three new applications have been deployed: `db`, `srv` and `ui`.
 
     ![Deploy MTAR file](./images/deployed_mtar.png)
 
@@ -525,7 +526,7 @@ We are now ready to build the `furnitureshop` project and deploy it to Cloud Fou
     **Note** - Please note that the development of Franck's app is still incomplete. To test the app we must first create destinations highlighted in Step 6. Once we create the destinations, we can test the application.
 
 
-6. Select the `srv` service and make a note of the URL under Application Routes.  This is the URL to start your service and will be needed when we create a destination in the next step.
+7. Select the `srv` service and make a note of the URL under Application Routes.  This is the URL to start your service and will be needed when we create a destination in the next step.
 
 [Top](#top)
 
@@ -544,7 +545,12 @@ Next, we need to create an instance of a destination service on the SAP Cloud Pl
     ![Service Instances](images/Exercise2_Service_Instances.png)
 
 1. Click on the `destination` service instance, then from the menu on the left, select Destinations
-1. Click on New Destination and enter the following:
+
+   ![Service Instances](images/Exercise2_Destination_Service_Instances.png)
+
+   ![Service Instances](images/Exercise2_Destinations.png)
+
+2. Click on New Destination and enter the following:
 
     | Property | Value | Notes |
     |---|---|---|
@@ -555,7 +561,7 @@ Next, we need to create an instance of a destination service on the SAP Cloud Pl
     | Proxy Type | `Internet` |
     | Authentication | `NoAuthentication` |
 
-2. Your destination should now look like this:
+3. Your destination should now look like this:
 
     ![destination get wish list](images/dest_getwishlist1.jpeg)
 
