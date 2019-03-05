@@ -14,8 +14,8 @@
   - [Navigation](#navigation)
   - [Table of Contents](#table-of-contents)
 - [Overview](#overview)
-- [1. Deploy Product Backend OData Service](#1-deploy-product-backend-odata-service)
-- [2. Configure the SAP Cloud Connector](#2-configure-the-sap-cloud-connector)
+- [1. Setting up On-Prem Data](#1-setting-up-on-prem-data)
+- [2. Test access to the On-Prem Data](#2-test-access-to-the-on-prem-data)
 - [3. Enhance the Service for the Wishlist Application](#3-enhance-the-service-for-the-wishlist-application)
 - [4. Extend the User Interface to Display On-Premise Product Data](#4-extend-the-user-interface-to-display-on-premise-product-data)
 - [5. Build and Deploy Application to SAP Cloud Platform](#5-build-and-deploy-application-to-sap-cloud-platform)
@@ -39,136 +39,27 @@ We will use Web IDE to modify our existing wishlist application so that it in ad
 
 
 <a name="Step1"></a>
-# 1. Deploy Product Backend OData Service
+# 1. Setting up On-Prem Data
 
-We first need to deploy a pre-built Java application in order to simulate our backend system. The OData service it provides will expose product information that can be consumed by our wishlist application.
+In the previous exercise we did the needful for the data that is stored in a HANA DB on SAP Cloud Platform. We now need to access the On-Prem Data.
 
-1. A Tomcat bundle is available in the TechEd student image in the folder
-   ```
-   D:\Files\Session\OPP363\apache-tomcat-9.0.11
-   ```
-2. Navigate to the `bin` folder
-3. Start the Tomcat server by double clicking on `startup.bat`.
-4. The OData service provided by this local Tomcat server can be viewed at this URL <http://localhost:8080/backend-odata/Product.svc>.
+In the interest of time and the prominence of the topic, the presenter has already set-up the on-premise system for your consumption. In the next section we will see, what has the presenter done already.
 
-    ![backend odata](images/Exercise2_1_backend_odata.JPG)
+However, if you wish to setup your own On-prem system running on your machine, you may refer to the [this documentation](/On-Premise-Setup). Once you complete the steps mentioned in the aforementioned document you can proceed with from [Step 3](#3-enhance-the-service-for-the-wishlist-application)
 
-    Notice that the OData service exposes a collection called `OnPremiseProductData`.
-
-5. Append `/OnPremiseProductData` to the URL and press enter, or click on this link <http://localhost:8080/backend-odata/Product.svc/OnPremiseProductData>.
-
-    ![backend odata](images/Exercise2_2_backend_odata_collection.JPG)
-
-    Now you can see the additional product information provided by this little server.
 
 [Top](#top)
 
-
 <a name="Step2"></a>
-# 2. Configure the SAP Cloud Connector
+# 2. Test access to the On-Prem Data
 
-The Cloud Connector is an optional on-premise component that integrates applications running on the SAP Cloud Platform with customer services running in on-premise systems.  It is the counterpart of SAP Cloud Platform Connectivity.
+1. //TODO Hit a URL to test that the on-prem system is up and running.
 
-In the case of these TechEd exercises, this component has already been installed.
+2. In your SAP Cloud Platform Cockpit, go to TechEd2018 &rarr; OPP363CF &rarr; Connectivity &rarr; Destinations
 
-1. Before we can configure the SAP Cloud Connector, we need to get our Subaccount ID.
+![backend odata](images/Exercise2_0_onprem_dest.png)
 
-1. Login to the SAP Cloud Platform cockpit [TechEd 2018](https://account.hana.ondemand.com/cockpit#/globalaccount/8fd39023-a237-4d71-9b6a-ed9d1719d275/subaccounts)
-
-1. Click the ![i_link](images/Exercise2_ilink.jpeg) icon in the bottom left corner of the Cloud Foundry subaccount tile (OPP363CF).
-
-    ![account id](images/Exercise2_3_CF_account_id.JPG)
-
-1. The subaccount ID (`dabec0d5-6df7-495d-9c96-f6b25dfd78a4`) is now displayed.
-You will need this value when configuring the cloud connector.
-
-    ![account id](images/Exercise2_4_CF_account_id.JPG)
-
-1. Launch SAP Cloud Connector URL <https://localhost:8443> and login with the credentials:
-
-    | Userid | Password |
-    |---|---|
-    |`Administrator`|`welcome`|
-
-    Please ignore the browser warning about an unsafe connection.  If you see this error, click on *Advanced* -> *Proceed to website*.
-
-1. If you see any existing entires in the Subaccount Dashboard table, please delete these as they are left over from a previous exercise
-
-1. Click on the _Add Subaccount_ button in the top right of the screen
-
-    ![add subaccount](images/Exercise2_5_cc_add_subaccount.JPG)
-
-1. Enter the following configuration values:
-
-    | Property | Value | Description
-    |---|---|---|
-    | Region Host | Select "Europe (Frankfurt)" | `cf.eu10.hana.ondemand.com`
-    | Subaccount | Paste in the GUID you copied in step 4 above | During TechEd 2018, this value will be `dabec0d5-6df7-495d-9c96-f6b25dfd78a4`
-    | Display Name | `ProductData Connector` |
-    | Login Email ID | `<your_login_email>` |
-    | Password | `<your_password>` |
-    | Location ID |`OPP363-XXX`<br>where XXX is your three digit student number | For the TechEd hands-on sessions, all participants share a single SAP Cloud Platform subaccount. To ensure the SAP Cloud Connector can identify each connection, each student must provide a unique Location ID.<br>You can have multiple SAP Cloud Connectors configured to work with a single sub account as long as each is identified by a unique Location ID
-    | Description | `ProductData Connector` |
-
-    ***IMPORTANT***
-    The value of Location ID is case sensitive! For the current exercise, ensure that you have entered ***OPP*** in upper case characters, since we will be using exactly this string value elsewhere in the exercise.
-
-    Ignore the fields under the section HTTPS Proxy on the right side, leave them blank
-
-
-1. Click _Save_.
-
-1. From the Subaccount Dashboard table, select the newly created subaccount by clicking the `>` icon on the far right of the table row.
-
-    ![Select dest](./images/Icon_Select_SAPCC_Dest.png)
-
-1. Under Tunnel Information, ensure that the status is Connected. If you see an error, check that you have entered your Region, Subaccount and login information correctly.
-
-    ![add subaccount](images/Exercise2_6_cc_subaccount_status.JPG)
-
-    We have now configured the SAP Cloud Connector running on our local laptop to connect to our SAP Cloud Platform account.  Next, we need to configure the SAP Cloud Connecter to grant access to the resources available from our simulated backend system.
-
-1. In the SAP Cloud Connector UI, click on `Cloud To On-Premise` from the left-hand menu.
-
-1. In the toolbar of the "Mapping Virtual to Internal System" table, click on the `+` icon.
-
-    ![add mapping](images/Exercise2_7_cloud_to_onprem.JPG)
-
-1. Choose Back-end Type as `Non-SAP System` and click _Next_.
-1. Choose Protocol as `HTTP` and click on _Next_.
-1. For Internal Host, enter:
-
-    - Internal Host: `localhost`
-    - Internal Port: `8080`
-
-1.	Click _Next_.
-1.	For Virtual Host, enter:
-
-    - Virtual Host: `productbackend.com`
-    - Virtual Port: `8080`
-
-1.	Click Next.
-1.	Leave Principal Type as `None` and click _Next_.
-1. Enter a Description and click _Next_.
-1. In the Summary Screen check the `Check Internal Host` check box and click _Finish_.
-
-    ![summary](images/Exercise2_8_summary.JPG)
-
-1. The "Check Result" column should now say `Reachable` in Green.
-
-    ![check results](images/Exercise2_9_check_results.JPG)
-
-1. Under the **Resources Accessible On productbackend.com:8080** section, click the `+` icon to define which resources will be exposed from this system.
-1. Enter `/backend-odata/` under URL Path.
-1. Select the option `Path and all Sub paths`.
-
-    ![check results](images/Exercise2_10_add_resource.JPG)
-
-1. Click _Save_.
-1. The Status should now be Green.
-1. If it is not green, check that the value for URL Path is correct
-
-This completes the configuration of the SAP Cloud Connector.
+Note: Pressing the ***Check Connection*** button will incorrectly state that your backend system cannot be reached.  Please ignore this error.
 
 [Top](#top)
 
@@ -646,7 +537,7 @@ Before proceeding with this step, please make sure the deployment is complete.
 
 Next, we need to create an instance of a destination service on the SAP Cloud Platform.  Once the destination service instance has been created, we can configure it to point to our SAP Cloud Connector. This configuration will allow us to access our local Tomcat server that is behaving as if it were an on-premise backend system.
 
-1. In your SAP Cloud Platform admin cockpit, go to your Cloud Foundry Subaccount and navigate to your space.
+1. In your SAP Cloud Platform admin cockpit, go to your Cloud Foundry sub-account and navigate to your space.
 
 1. Expand Services, then select Service Instances
 
@@ -664,29 +555,9 @@ Next, we need to create an instance of a destination service on the SAP Cloud Pl
     | Proxy Type | `Internet` |
     | Authentication | `NoAuthentication` |
 
-   Your destination should now look like this:
+2. Your destination should now look like this:
 
     ![destination get wish list](images/dest_getwishlist1.jpeg)
-
-1. Click on Save and add a second destination with the following values:
-
-    | Property | Value | Notes |
-    |---|---|---|
-    | Name | `ONPREM_BACKEND` | This is the destination referenced in your `BackendService.java` class
-    | Type | `HTTP` |
-    | Description | `Local Backend` |
-    | Location ID | `OPP363-XXX`  | `XXX` is your two-digit student number<br>***Important***<br>This field value is case-sensitive and will only become visible ***after*** you have selected a Proxy Type of `OnPremise`
-    | URL | `http://productbackend.com:8080` | The virtual URL defined in your SAP Cloud Connector
-    | Proxy Type | `OnPremise` |
-    | Authentication | `NoAuthentication` |
-
-1. Your destination should now look like this:
-
-    ![destination](images/Exercise4_Destination.png)
-
-    Click on Save.
-
-    At this point, pressing the ***Check Connection*** button will incorrectly state that your backend system cannot be reached.  Please ignore this error.
 
 [Top](#top)
 
@@ -696,19 +567,19 @@ Next, we need to create an instance of a destination service on the SAP Cloud Pl
 
 1. In the SAP Cloud Platform Cockpit, navigate to your Space and then select Applications
 
-1. Click on the `srv` application, then click on the link under Application Routes to launch the application
+2. Click on the `srv` application, then click on the link under Application Routes to launch the application
 
     ![testingsrv0](images/Exercise2_0_testingsrv0.jpg)
 
-1. You should now be able to see the URL to the ODATA service that the `srv` application has created.  On clicking the link you should now see a new collection `BackEndProductData`
+3. You should now be able to see the URL to the ODATA service that the `srv` application has created.  On clicking the link you should now see a new collection `BackEndProductData`
 
     ![testingsrv1](images/Exercise2_0_testingsrv1.jpg)
 
-1. Append `/BackEndProductData` to the url to view the Collection
+4. Append `/BackEndProductData` to the url to view the Collection
 
     ![testingsrv2](images/Exercise2_0_testingsrv2.jpg)
 
-1. To test the `ui` application, navigate to the wishlist application in the SAP Cloud Platform cockpit and launch the URL.  You will see a new tab showing the Backend Product information.  However, you will not see any rating information yet as this functionality will be added in the next exercise
+5. To test the `ui` application, navigate to the wishlist application in the SAP Cloud Platform cockpit and launch the URL.  You will see a new tab showing the Backend Product information.  However, you will not see any rating information yet as this functionality will be added in the next exercise
 
     ![testing](images/Exercise2_0_testingui.JPG)
 
