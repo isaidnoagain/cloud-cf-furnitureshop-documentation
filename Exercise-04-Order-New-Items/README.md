@@ -45,7 +45,7 @@ In the previous exercise we did the needful for the data that is stored in a HAN
 
 In the interest of time and the prominence of the topic, the presenter has already set-up the on-premise system for your consumption. In the next section we will see, what has the presenter done already.
 
-However, if you wish to setup your own On-prem system running on your machine, you may refer to the [this documentation](/On-Premise-Setup.md). Once you complete the steps mentioned in the aforementioned document you can proceed with from [Step 3](#3-enhance-the-service-for-the-wishlist-application)
+However, if you wish to setup your own On-prem system running on your machine, you may refer to the [this documentation](./On-Premise-Setup.md). Once you complete the steps mentioned in the aforementioned document you can proceed with from [Step 3](#3-enhance-the-service-for-the-wishlist-application)
 
 
 [Top](#top)
