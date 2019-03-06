@@ -123,7 +123,7 @@ In this section, we will setup the view and controller for products list view - 
 
     ![Step Image](images/Exercise7_2-5_prod_list_select.png)
 
-    Note: To uncomment, select the commented lines and press Ctrl-/ (Control slash) or right-click over the selected lines and choose 'Toggle Line Comment'.
+    Note: To uncomment, select the commented lines and press `Ctrl + /` or `Cmd + /` or right-click over the selected lines and choose 'Toggle Line Comment'.
 
 [Top](#Top)
 

@@ -53,7 +53,19 @@ However, if you wish to setup your own On-prem system running on your machine, y
 <a name="Step2"></a>
 # 2. Test access to the On-Prem Data
 
-1. //TODO Hit a URL to test that the on-prem system is up and running.
+1. To test if the On-Prem system is up and running, please launch the following URL:
+   ```url
+   https://teched2018-opp363-opp363-space-245-srv.cfapps.eu10.hana.ondemand.com/odata/v2/CatalogService/BackEndProductData
+   ```
+
+   If the on-premise system is running (on the presenter's system), you should see the data from on-prem.
+
+   ![backend odata](images/Exercise2_0_onprem_data_success.png)
+
+   If you see the following image, please ask the presenter to start the On-Premise system.
+
+   ![backend odata](images/Exercise2_0_onprem_data_fail.png)
+
 
 2. In your SAP Cloud Platform Cockpit, go to TechEd2018 &rarr; OPP363CF &rarr; Connectivity &rarr; Destinations
 
