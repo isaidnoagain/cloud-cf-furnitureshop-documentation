@@ -39,7 +39,7 @@ Key benefits:
 
 You have completed till [Exercise 06 -  Comments and Ratings](../Exercise-06-Comments-and-Ratings-Backend) and you should have the applications up and running on your SAP Cloud Platform.
 
-In this exercise, we will be performing manual and auto scaling on the comments and ratings backend logic. Consider a scenario where the review application is used by a large number of employees just like Mary, and the memory consumption, CPU usage is increased for this application. To cater to the increasing demand for this application we need to scale up the application so that request can be fulfilled.
+In this exercise, we will be performing manual and auto scaling on the comments and ratings backend logic. Consider a scenario where the review application is used by a large number of customers just like Mary, and the memory consumption, CPU usage is increased for this application. To cater to the increasing demand for this application we need to scale up the application so that request can be fulfilled.
 
 Below we will be using SAP Cloud Platform cockpit and auto scaling policies to perform these operations.
 
@@ -74,7 +74,7 @@ We will configure the scaling manually in the SAP Cloud Platform Cockpit. Please
 
 1. Let’s get back the application to original state, click on change quota to **reduce the quota back to `256 MB`**.
 
-    Not doing say may cause issues in the upcoming steps.
+    Not doing so may cause issues in the upcoming steps.
 
 2. Click _Save_.
 
@@ -120,7 +120,7 @@ We will configure the scaling manually in the SAP Cloud Platform Cockpit. Please
       "instance_min_count": 1,
       "instance_max_count": 2,
       "schedules": {
-        "timezone": "Asia/Kolkata",
+        "timezone": "Asia/Shanghai",
         "scaling_rules": [
         {
           "metric_type": "memoryused",

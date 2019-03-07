@@ -42,7 +42,7 @@ At the end of Exercise 7 we  built an application which allows Mary to submit he
 
 At the end of Exercise 8, we built a twitter module `tweet_comments` which posts Mary's comments on to twitter.
 
-Mary does not know that her ratings and reviews are being posted on twitter. Thus, we have decided to update our UI to notify Mary that her reviews are being tweeted. Now, since Mary is already using the `Comments and Ratings` application we need to ensure that the newer version doesn't hinder her from using the application.
+Mary does not know that her ratings and reviews are being posted on twitter. Thus, Franck has decided to update the UI to notify Mary that her reviews are being tweeted. Now, since Mary is already using the `Comments and Ratings` application Franck needs to ensure that the newer version doesn't hinder her from using the application.
 
 This is where Blue-Green deployment comes in. Mary is using the application deployed at the end of Exercise-8 (Blue version). We will make our changes in the code and use the SAP Cloud Platform capability to deploy an updated version of the application (Green version) through Blue-Green deployment. This will create a new application with a unique URL for you to test your changes. While you test the Green version, Mary can continue using the Blue version. Once you are satisfied with your changes, you will finish the Blue-Green deployment process at the end of which you will only have the updated version running with Mary accessing the updated version through the URL that she used to access the Blue version.
 
