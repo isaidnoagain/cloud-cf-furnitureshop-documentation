@@ -130,7 +130,14 @@ We will make small changes to the user interface so that Mary knows that her rev
    * The download may take few minutes.
    * The `.mtar` file will be saved to your users downloads folder. You may move it to another folder for your convenience but we will further refer to the location of this file as the `mtar_location`.
 
-1. Next you will need to log into Cloud Foundry using the Command Line Interface (CLI), which you have set up in [Exercise 01](../Exercise-01-Setup). In the terminal window type `cf login`.
+2. Download the CF Plugin for SAP Cloud Platform using this [link](https://github.com/cloudfoundry-incubator/multiapps-cli-plugin)).
+
+3. In your Command Prompt / Terminal, run the following command
+```
+cf install-plugin <path-to-the-plugin> -f
+```
+
+4. Next you will need to log into Cloud Foundry using the Command Line Interface (CLI), which you have set up in [Exercise 01](../Exercise-01-Setup). In the terminal window type `cf login`.
 
     ![Step Image](images/ex-11-2-3-product_ratings-Blue.mtar-CLI.jpg)
 
@@ -140,9 +147,9 @@ We will make small changes to the user interface so that Mary knows that her rev
 
         `cf login -a https://api.cf.eu10.hana.ondemand.com`
 
-1. Select `TechEd2018_OPP363` as the `org` and `OPP363_SPACE_XXX` as the space.
+5. Select `TechEd2018_OPP363` as the `org` and `OPP363_SPACE_XXX` as the space.
 
-1. Deploy the archive using Blue Green deployment with the command:
+6. Deploy the archive using Blue Green deployment with the command:
 
     ```
     cf bg-deploy <Path to Mtar>\product_ratings_1.0.2.mtar
@@ -169,7 +176,7 @@ We will make small changes to the user interface so that Mary knows that her rev
     ![Step Image](images/ex-11-2-5-web_ide_builder_stopped.png)
 
 
-1. Open the SAP Cloud Platform cockpit to validate the application and services are running correctly.
+7. Open the SAP Cloud Platform cockpit to validate the application and services are running correctly.
 
     * Log in to the [SAP Cloud Platform cockpit](https://account.hana.ondemand.com/cockpit).
     * Navigate to the correct space by selecting the Account `TechEd2018`, the Sub account `OPP363CF`, and the space `OPP363_SPACE_XX`.
@@ -181,13 +188,13 @@ We will make small changes to the user interface so that Mary knows that her rev
 
     ![Step Image](images/ex-11-2-6-bg-apps-scp.png)
 
-1. Click on `ratings_frontend_green`.
+8. Click on `ratings_frontend_green`.
 
     ![Step Image](images/ex-11-2-7-bg-rfe-app.png)
 
     You will see that the app URL for this application has the keyword 'idle' in it. This is an indication that the currently active version, the one being used by Mary, is `ratings_frontend` app and not `ratings_frontend_green` app.
 
-1. Now, let's see how the two URLs point to two different applications.
+9.  Now, let's see how the two URLs point to two different applications.
 
     * In the `ratings_frontend_green` app, click on the application URL that you see.
 
@@ -209,7 +216,7 @@ We will make small changes to the user interface so that Mary knows that her rev
 
     To check if your comments are still being tweeted, please head over to the [Twitter handle](https://twitter.com/sapfurnishop)
 
-1.  Now that we have verified that our Green version is working fine, we will make it the active version. In your CLI tool enter the command, that you noted in Step 6, to resume Blue Green deployment.
+10. Now that we have verified that our Green version is working fine, we will make it the active version. In your CLI tool enter the command, that you noted in Step 6, to resume Blue Green deployment.
 
     ```
     cf bg-deploy -i <PROCESS ID> -a resume
@@ -217,13 +224,13 @@ We will make small changes to the user interface so that Mary knows that her rev
 
     Note: If your deployment is stuck at `ratings_backend`, you may have to close the web browser tabs where you are running the `ratings_frontend` applications.
 
-1. Once the `bg-deploy resume` is successful, go to your SAP Cloud Platform cockpit. You should now see only the *`*-green`* applications.
+11. Once the `bg-deploy resume` is successful, go to your SAP Cloud Platform cockpit. You should now see only the *`*-green`* applications.
 
     ![Step Image](images/ex-11-2-10-active-apps.png)
 
     The `bg-deploy resume` command has deleted the older version of applications.
 
-1. Click on `ratings_frontend_green`.
+12. Click on `ratings_frontend_green`.
 
     ![Step Image](images/ex-11-2-11-active-rfe-app.png)
 
@@ -231,7 +238,7 @@ We will make small changes to the user interface so that Mary knows that her rev
 
     Note: If you can't see the updated view, you might have the older version in your browser cache. In such a case, open the URL in an 'Incognito' or 'Private' mode.
 
-1. To verify that the old route is running the updated version of the application, click on `ratings_frontend_green` application's URL.
+13. To verify that the old route is running the updated version of the application, click on `ratings_frontend_green` application's URL.
 
     ![Step Image](images/ex-11-2-12-active-app.png)
 
