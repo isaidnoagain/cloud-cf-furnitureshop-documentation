@@ -130,7 +130,9 @@ We will make small changes to the user interface so that Mary knows that her rev
    * The download may take few minutes.
    * The `.mtar` file will be saved to your users downloads folder. You may move it to another folder for your convenience but we will further refer to the location of this file as the `mtar_location`.
 
-2. Download the CF Plugin for SAP Cloud Platform using this [link](https://github.com/cloudfoundry-incubator/multiapps-cli-plugin)).
+2. Download the CF Plugin for SAP Cloud Platform using thess links
+   * [Windows](https://github.com/cloudfoundry-incubator/multiapps-cli-plugin/releases/download/v2.0.11/mta_plugin_windows_amd64.exe).
+   * [Mac](https://github.com/cloudfoundry-incubator/multiapps-cli-plugin/releases/download/v2.0.11/mta_plugin_darwin_amd64)
 
 3. In your Command Prompt / Terminal, run the following command
 ```
