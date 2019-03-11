@@ -493,7 +493,7 @@ We are now ready to build the `furnitureshop` project and deploy it to Cloud Fou
 
   ![Build Project](images/Exercise2_build_db.png)
 
-2. Next, delete the DB Instance created on your SAP Cloud Platform Cockpit. As done in [the second step of this section](https://github.com/sandeep-tds/cloud-cf-furnitureshop-documentation/tree/master/Exercise-03-Publish-Wishlist#3-clean-up).
+2. Next, delete the DB Instance created on your SAP Cloud Platform Cockpit. As done in [the second step of the clean-up section in Exercise 3](https://github.com/sandeep-tds/cloud-cf-furnitureshop-documentation/tree/master/Exercise-03-Publish-Wishlist#3-clean-up).
 
 3. Right-click on the project name and select _Build -> Build_.
 
