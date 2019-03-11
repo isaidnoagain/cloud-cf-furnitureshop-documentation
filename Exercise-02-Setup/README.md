@@ -171,8 +171,8 @@ A few notes:
 2. If you see any folders in the Web IDE before you start the exercise, please delete all such folders and start afresh.
 3. Please note that the guide and configurations have been done keeping a nomenclature in mind. Thus, please do not change the names of any projects or folders unless the documentation explicitly asks you to.
 4. All the exercises are interdependent, a deviation in an earlier exercise may obstruct the completion of a subsequent exercise, making you re-do the earlier exercise.
-6. If at any point of time you have query, please ask the presenter to come over - no matter what the question is.
-7. Finally, this is a long exercise, so patience would be the virtue here.
+6. If at any point of time you have a query, please ask the presenter to come over - no matter what the question is.
+7. Finally, this is a long exercise, so patience will be key to navigate through the exercise successfully.
 
 
 <hr>
