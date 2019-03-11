@@ -8,12 +8,17 @@
 
 
 ## Table of Contents
-* [SAP Web IDE Full-Stack](#user-content-step1)
-* [Configure Cloud Foundry](#user-content-step2)
-* [Enable Extra Features in Web IDE](#user-content-step3)
-* [Simplify the Copying of Code Blocks from GitHub](#user-content-step4)
-* [Tips on Saving your Changes in SAP Web IDE Full-Stack](#user-content-step5)
-* [Verify installation of Cloud Foundry CLI](#user-content-step6)
+- [Exercise 2 - Setup](#exercise-2---setup)
+  - [Navigation](#navigation)
+  - [Table of Contents](#table-of-contents)
+  - [1. SAP Web IDE Full-Stack](#1-sap-web-ide-full-stack)
+  - [2. Configure Cloud Foundry](#2-configure-cloud-foundry)
+  - [3. Enable Extra Features in Web IDE](#3-enable-extra-features-in-web-ide)
+  - [4. Simplify the Copying of Code Blocks from GitHub](#4-simplify-the-copying-of-code-blocks-from-github)
+  - [5. Tips on Saving your Changes in SAP Web IDE Full-Stack](#5-tips-on-saving-your-changes-in-sap-web-ide-full-stack)
+  - [6. Verify installation of Cloud Foundry CLI](#6-verify-installation-of-cloud-foundry-cli)
+  - [7. Pre-cursor notes to Learn 2 Win Week - Shanghai Participants](#7-pre-cursor-notes-to-learn-2-win-week---shanghai-participants)
+- [Navigation](#navigation-1)
 
 
 
@@ -153,7 +158,22 @@ It is possible that plugins other than the ones shown above may be listed, but t
 * `deploy`
 * `bg-deploy`
 
-This completes the system setup for your exercises.
+If Cloud Foundry CLI is not installed on your system, please refer to the [3rd step in the Appendix Section of this documentation.](https://github.com/sandeep-tds/cloud-cf-furnitureshop-documentation/tree/master/Optional-Exercise-Local-MTAR-Build#appendix)
+
+<a name="Step7"></a>
+## 7. Pre-cursor notes to Learn 2 Win Week - Shanghai Participants
+
+This hands-on exercise and the corresponding dev guide was developed keeping the TechEd setup in mind. The current documentation that you are referring to has been adapted to L2WWS. However, if you face any discrepancy in your observation and the documentation, please bring the matter to the presenters' attention.
+
+A few notes:
+
+1. If you see any applications running on your SAP Cloud Platform space (OPP363_3XX) before you start the exercise, please delete all such applications.
+2. If you see any folders in the Web IDE before you start the exercise, please delete all such folders and start afresh.
+3. Please note that the guide and configurations have been done keeping a nomenclature in mind. Thus, please do not change the names of any projects or folders unless the documentation explicitly asks you to.
+4. All the exercises are interdependent, a deviation in an earlier exercise may obstruct the completion of a subsequent exercise, making you re-do the earlier exercise.
+6. If at any point of time you have query, please ask the presenter to come over - no matter what the question is.
+7. Finally, this is a long exercise, so patience would be the virtue here.
+
 
 <hr>
 © 2018 SAP SE
